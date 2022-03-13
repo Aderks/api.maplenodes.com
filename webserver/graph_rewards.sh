@@ -120,7 +120,12 @@ displayTime3=$(displaytime3)
 
 #Allocation pending reward
 allocations_info=$(echo `curl -s -X GET https://api.maplenodes.com/graph/allocations/$indexer_id1`)
+
+if [ "$allocations_info" == '[]' ]; then
+total=0
+else
 total=$(echo $allocations_info | jq .[].pending_reward | awk '{s+=$1} END {print s}')
+fi
 
 
 #Total tokens allocated by indexer
@@ -207,6 +212,13 @@ pending_delegator_rewards=$(echo "${total} * ${delegatorRewardCut_decimal}" | bc
 
 #Pending Rewards Rate Per Hour
 pending_rewards_hr=$(echo $allocations_info | jq .[].pending_reward_rate | awk '{s+=$1} END {print s}')
+
+if [ -z "$pending_rewards_hr" ]; then
+pending_rewards_hr=0
+else
+:
+fi
+
 pending_rewards_hr_usd=$(echo "${grt_usd} * ${pending_rewards_hr}" | bc -l | xargs printf %.2f)
 pending_indexer_rewards_hr=$(echo "${pending_rewards_hr} * ${indexingRewardCut_decimal}" | bc -l | xargs printf %.2f)
 pending_indexer_rewards_hr_usd=$(echo "${grt_usd} * ${pending_indexer_rewards_hr}" | bc -l | xargs printf %.2f)
