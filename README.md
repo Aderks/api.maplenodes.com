@@ -37,5 +37,5 @@ sudo systemctl enable api
 
 sudo systemctl start api && journalctl -f -o cat -u api
 sudo systemctl stop api && journalctl -f -o cat -u api
-sudo systemctl restart graph && journalctl -f -o cat -u api
+sudo systemctl restart api && journalctl -f -o cat -u api
 ```
