@@ -33,7 +33,7 @@ RUN apt-get install gnupg -y
 
 RUN add-apt-repository ppa:certbot/certbot -y
 
-RUN apt install python-certbot-nginx -y
+RUN apt install python3-certbot-nginx -y
 
 # Setup uwsgi dir
 RUN mkdir -p /opt/uwsgi/conf 
