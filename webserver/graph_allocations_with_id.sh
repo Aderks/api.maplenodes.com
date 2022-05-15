@@ -9,7 +9,7 @@ currentTime=$(date -u +%s)
 indexer_id=$1
 
 indexer_id1=$(echo $indexer_id | tr '[:upper:]' '[:lower:]')
-indexer=`curl -s -X POST -H "Content-Type: application/json" -d '{ "query": "{indexer(id: \"'$indexer_id1'\") { allocationCount allocations { id createdAt allocatedTokens createdAtEpoch subgraphDeployment { versions (first: 1) { subgraph { currentVersion { subgraph { displayName } } } } id originalName ipfsHash deniedAt } } } graphNetworks { currentEpoch } } "}' https://api.thegraph.com/subgraphs/name/graphprotocol/graph-network-mainnet`
+indexer=`curl -s -X POST -H "Content-Type: application/json" -d '{ "query": "{indexer(id: \"'$indexer_id1'\") { allocationCount allocations { id createdAt allocatedTokens createdAtEpoch subgraphDeployment { versions (first: 1) { subgraph { currentVersion { subgraph { displayName } } } } id originalName ipfsHash deniedAt } } } graphNetworks { currentEpoch } } "}' https://gateway.thegraph.com/network`
 
 allocationCount=$(echo $indexer | jq -r .data.indexer.allocationCount) 
 

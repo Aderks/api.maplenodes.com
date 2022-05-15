@@ -8,7 +8,7 @@ currentTime=$(date -u +%s)
 #Graph Subgraph Indexer
 indexer_id=$1
 indexer_id1=$(echo $indexer_id | tr '[:upper:]' '[:lower:]')
-indexer=`curl -s -X POST -H "Content-Type: application/json" -d '{ "query": "{indexer(id: \"'$indexer_id1'\") {createdAt url geoHash defaultDisplayName stakedTokens allocatedTokens unstakedTokens lockedTokens tokensLockedUntil allocationCount allocations { id createdAt } totalAllocationCount queryFeesCollected queryFeeRebates rewardsEarned indexerIndexingRewards delegatorIndexingRewards delegatedCapacity tokenCapacity availableStake delegatedTokens delegatorShares delegationExchangeRate indexingRewardCut delegatorQueryFees queryFeeCut delegatorParameterCooldown lastDelegationParameterUpdate forcedClosures totalReturn annualizedReturn stakingEfficiency indexingRewardEffectiveCut queryFeeEffectiveCut } } "}' https://api.thegraph.com/subgraphs/name/graphprotocol/graph-network-mainnet`
+indexer=`curl -s -X POST -H "Content-Type: application/json" -d '{ "query": "{indexer(id: \"'$indexer_id1'\") {createdAt url geoHash defaultDisplayName stakedTokens allocatedTokens unstakedTokens lockedTokens tokensLockedUntil allocationCount allocations { id createdAt } totalAllocationCount queryFeesCollected queryFeeRebates rewardsEarned indexerIndexingRewards delegatorIndexingRewards delegatedCapacity tokenCapacity availableStake delegatedTokens delegatorShares delegationExchangeRate indexingRewardCut delegatorQueryFees queryFeeCut delegatorParameterCooldown lastDelegationParameterUpdate forcedClosures totalReturn annualizedReturn stakingEfficiency indexingRewardEffectiveCut queryFeeEffectiveCut } } "}' https://gateway.thegraph.com/network`
 
 indexer_ens=$(echo $indexer | jq -r .data.indexer.defaultDisplayName)
 

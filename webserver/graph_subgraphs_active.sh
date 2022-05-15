@@ -2,7 +2,7 @@
 
 #set -x
 
-graphSubgraphs=`curl -s -X POST -H "Content-Type: application/json" -d '{ "query": "{ subgraphs (first:1000, where: {active: true}) { currentVersion { subgraphDeployment { id createdAt ipfsHash originalName signalledTokens stakedTokens unsignalledTokens deniedAt } } displayName active } }"}' https://api.thegraph.com/subgraphs/name/graphprotocol/graph-network-mainnet`
+graphSubgraphs=`curl -s -X POST -H "Content-Type: application/json" -d '{ "query": "{ subgraphs (first:1000, where: {active: true}) { currentVersion { subgraphDeployment { id createdAt ipfsHash originalName signalledTokens stakedTokens unsignalledTokens deniedAt } } displayName active } }"}' https://gateway.thegraph.com/network`
 
 subgraphs_array=$(echo $graphSubgraphs | jq '[.data.subgraphs[] | (select(.currentVersion.subgraphDeployment.deniedAt | contains(0)))]')
 

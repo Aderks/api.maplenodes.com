@@ -2,8 +2,9 @@
 
 #set -x
 
-indexers=`curl -s -X POST -H "Content-Type: application/json" -d '{ "query": "{indexers(first: 1000) { id defaultDisplayName indexingRewardEffectiveCut queryFeeEffectiveCut stakedTokens delegatedTokens allocatedTokens } } "}' https://api.thegraph.com/subgraphs/name/graphprotocol/graph-network-mainnet`
+indexers=`curl -s -X POST -H "Content-Type: application/json" -d '{ "query": "{indexers(first: 1000) { id defaultDisplayName indexingRewardEffectiveCut queryFeeEffectiveCut stakedTokens delegatedTokens allocatedTokens } } "}' https://gateway.thegraph.com/network`
 
+#indexers_array=$(echo $indexers | jq '[.data.indexers[] | .["indexer"] = .id | .["indexer_name"] = .defaultDisplayName | del(.id, .defaultDisplayName)]') 
 echo $indexers | jq '[.data.indexers[] |
 .allocatedTokens |= tonumber / 1000000000000000000 | 
 .delegatedTokens |= tonumber / 1000000000000000000 |

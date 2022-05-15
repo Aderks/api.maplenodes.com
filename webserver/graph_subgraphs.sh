@@ -2,7 +2,7 @@
 
 #set -x
 
-graphSubgraphs=`curl -s -X POST -H "Content-Type: application/json" -d '{ "query": "{subgraphDeployments { id signalledTokens unsignalledTokens stakedTokens originalName indexingRewardAmount createdAt ipfsHash} } "}' https://gateway.network.thegraph.com/network`
+graphSubgraphs=`curl -s -X POST -H "Content-Type: application/json" -d '{ "query": "{subgraphDeployments { id signalledTokens unsignalledTokens stakedTokens originalName indexingRewardAmount createdAt ipfsHash} } "}' https://gateway.thegraph.com/network`
 
 subgraphs_array=$(echo $graphSubgraphs | jq -r .data.subgraphDeployments)
 
