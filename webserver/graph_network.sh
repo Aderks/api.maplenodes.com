@@ -1,6 +1,6 @@
 #! /bin/bash
 
-graphNetwork=`curl -s -X POST -H "Content-Type: application/json" -d '{ "query": "{graphNetworks { totalTokensAllocated totalTokensStaked totalSupply totalDelegatedTokens } } "}' https://api.thegraph.com/subgraphs/name/graphprotocol/graph-network-mainnet`
+graphNetwork=`curl -s -X POST -H "Content-Type: application/json" -d '{ "query": "{graphNetworks { totalTokensAllocated totalTokensStaked totalSupply totalDelegatedTokens } } "}' https://gateway.thegraph.com/network`
 
 indexerStake=$(echo $graphNetwork | jq -r .data.graphNetworks[].totalTokensStaked)
 indexerStake1=$(echo "$indexerStake / 1000000000000000000" | bc -l | xargs printf %.2f)

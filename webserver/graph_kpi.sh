@@ -2,7 +2,7 @@
 
 #set -x
 
-indexers=`curl -s -X POST -H "Content-Type: application/json" -d '{ "query": "{indexers(first: 500) { id stakedTokens queryFeeRebates queryFeesCollected defaultDisplayName } } "}' https://api.thegraph.com/subgraphs/name/graphprotocol/graph-network-mainnet`
+indexers=`curl -s -X POST -H "Content-Type: application/json" -d '{ "query": "{indexers(first: 500) { id stakedTokens queryFeeRebates queryFeesCollected defaultDisplayName } } "}' https://gateway.thegraph.com/network`
 
 indexer=$(echo $indexers | jq -r .data.indexers[].id)
 
