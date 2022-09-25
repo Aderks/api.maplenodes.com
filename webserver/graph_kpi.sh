@@ -12,5 +12,6 @@ echo $indexers | jq '[.data.indexers[] |
 .totalFeeRebates = .queryFeeRebates + .delegatorQueryFees |
 if .queryFeesCollected == 0 then .revenueSharePerformance = 0 else .revenueSharePerformance = (.totalFeeRebates / .queryFeesCollected) * 100 end |
 if .stakedTokens == 0 then .revenueSelfStakePerformance = 0 else .revenueSelfStakePerformance = (.totalFeeRebates / .stakedTokens) end |
-if .delegatedTokens == 0 then .revenueDelegationStakePerformance = 0 else .revenueDelegationStakePerformance = (.totalFeeRebates / .delegatedTokens) end |
-if .tokenCapacity == 0 then .revenueTotalStakePerformance = 0 else .revenueTotalStakePerformance = (.totalFeeRebates / .tokenCapacity) end]'
+if .delegatedTokens < 1 then .revenueDelegationStakePerformance = 0 else .revenueDelegationStakePerformance = (.totalFeeRebates / .delegatedTokens) end |
+if .tokenCapacity == 0 then .revenueTotalStakePerformance = 0 else .revenueTotalStakePerformance = (.totalFeeRebates / .tokenCapacity) end |
+select(.totalFeeRebates > 500)]'

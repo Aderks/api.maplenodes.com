@@ -9,7 +9,7 @@ currentTime=$(date -u +%s)
 indexer_id=$1
 
 indexer_id1=$(echo $indexer_id | tr '[:upper:]' '[:lower:]')
-indexer=`curl -s -X POST -H "Content-Type: application/json" -d '{ "query": "{indexer(id: \"'$indexer_id1'\") { allocationCount allocations { id createdAt allocatedTokens createdAtEpoch subgraphDeployment { versions (first: 1) { subgraph { currentVersion { subgraph { displayName } } } } id originalName ipfsHash deniedAt } } } graphNetworks { currentEpoch } } "}' https://gateway.thegraph.com/network`
+indexer=`curl -s -X POST -H "Content-Type: application/json" -d '{ "query": "{indexer(id: \"'$indexer_id1'\") { allocationCount allocations { id createdAt allocatedTokens createdAtEpoch subgraphDeployment { versions (first: 1) { subgraph { currentVersion { subgraph { displayName } } } } id originalName ipfsHash deniedAt } } } graphNetworks { currentEpoch } } "}' https://api.thegraph.com/subgraphs/name/graphprotocol/graph-network-goerli`
 
 allocationCount=$(echo $indexer | jq -r .data.indexer.allocationCount) 
 
@@ -26,12 +26,12 @@ result=$(echo '['''
 for allocation in $allocation
 do
 
-  reward=`curl -s -k http://192.168.50.66:8545 \
-    -H 'content-type: application/json' \
-    --data-binary '{"jsonrpc":"2.0","id":1,"method":"eth_call","params":[{"from":"0x0000000000000000000000000000000000000000","data":"0x79ee54f7000000000000000000000000'$allocation'","to":"0x9ac758ab77733b4150a901ebd659cbf8cb93ed66"},"latest"]}'   \
-    --compressed|jq -r '.result'| tr a-z A-Z | sed -e "s/^0X//" | xargs -I % echo "ibase=16; scale=18;" %|bc`
-  reward2=$(echo "$reward / 1000000000000000000" | bc -l | xargs printf %.2f)
-  total=$(echo "$reward2 + $total" | bc -l | xargs printf %.2f)
+  #reward=`curl -s -k http://127.0.0.1:8545 \
+  #  -H 'content-type: application/json' \
+  #  --data-binary '{"jsonrpc":"2.0","id":1,"method":"eth_call","params":[{"from":"0x0000000000000000000000000000000000000000","data":"0x79ee54f7000000000000000000000000'$allocation'","to":"0x9ac758ab77733b4150a901ebd659cbf8cb93ed66"},"latest"]}'   \
+  #  --compressed|jq -r '.result'| tr a-z A-Z | sed -e "s/^0X//" | xargs -I % echo "ibase=16; scale=18;" %|bc`
+  #reward2=$(echo "$reward / 1000000000000000000" | bc -l | xargs printf %.2f)
+  #total=$(echo "$reward2 + $total" | bc -l | xargs printf %.2f)
 
   allocationCreatedAt=$(echo $indexer | jq -r .data.indexer.allocations[$i].createdAt)
   date=$(echo $allocationCreatedAt)
@@ -61,13 +61,13 @@ do
   allocationTimeElapsedHr=$(echo "$allocationTimeElapsed / 3600" | bc -l | xargs printf %.2f)
   timeelapsed=$(echo $allocationTimeElapsedHr)
 
-  pending_rewards_hr=$(echo "${reward2} / ${timeelapsed}" | bc -l | xargs printf %.2f)
+  #pending_rewards_hr=$(echo "${reward2} / ${timeelapsed}" | bc -l | xargs printf %.2f)
 
   echo '{''' '"'""id""'"': '"'""0x$allocation""'"' ','''
-  echo '"'""pending_reward""'"':'' $reward2 ','''
+  echo '"'""pending_reward""'"':'' 0 ','''
   echo '"'""created_at""'"':'' $date ','''
   echo '"'""time_elapsed""'"':'' $timeelapsed ','''
-  echo '"'""pending_reward_rate""'"':'' $pending_rewards_hr ','''
+  echo '"'""pending_reward_rate""'"':'' 0 ','''
   echo '"'""subgraph_id""'"':'' '"'""$allocationSubgraphId1'"'"" ','''
   echo '"'""subgraph_ipfs""'"':'' '"'""$allocationSubgraphIPFS1'"'"" ','''
   echo '"'""subgraph_name""'"':'' '"'""$allocationDisplayName1'"'"" ','''

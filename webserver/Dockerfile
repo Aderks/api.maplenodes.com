@@ -85,16 +85,27 @@ COPY trollbox.sh /services/trollbox
 COPY trollboxmsg.sh /services/trollbox
 COPY trollboxchat.json /services/trollbox
 COPY graph_rewards.sh /services/scripts
+COPY graph_rewards_testnet.sh /services/scripts
 COPY graph_indexers.sh /services/scripts
+COPY graph_indexers_testnet.sh /services/scripts
 COPY graph_network.sh /services/scripts
+COPY graph_network_testnet.sh /services/scripts
 COPY graph_ens.sh /services/scripts
 COPY graph_subgraphs.sh /services/scripts
 COPY graph_subgraphs_active.sh /services/scripts
+COPY graph_subgraphs_active_testnet.sh /services/scripts
 COPY graph_allocations.sh /services/scripts
 COPY graph_allocations_with_id.sh /services/scripts
+COPY graph_allocations_with_id_testnet.sh /services/scripts
 COPY graph_kpi.sh /services/scripts
 COPY graph_trace.sh /services/scripts
 COPY graph_network_stake.sh /services/scripts
+COPY graph_network_stake_testnet.sh /services/scripts
+COPY graph_failed_subgraph.sh /services/scripts
+COPY evmos_transactions.sh /services/scripts
+COPY evmos_apr.sh /services/scripts
+COPY evmos_evm_transactions.sh /services/scripts
+COPY evmos_evm_token_transfers.sh /services/scripts
 
 # Execute rights on scripts
 

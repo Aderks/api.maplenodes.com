@@ -23,7 +23,7 @@ result=$(echo '['''
 for allocation in $allocation
 do
 
-	reward=`curl -s -k http://127.0.0.1:8545 \
+	reward=`curl -s -k http://192.168.50.66:8545 \
 	  -H 'content-type: application/json' \
 	  --data-binary '{"jsonrpc":"2.0","id":1,"method":"eth_call","params":[{"from":"0x0000000000000000000000000000000000000000","data":"0x79ee54f7000000000000000000000000'$allocation'","to":"0x9ac758ab77733b4150a901ebd659cbf8cb93ed66"},"latest"]}'   \
 	  --compressed|jq -r '.result'| tr a-z A-Z | sed -e "s/^0X//" | xargs -I % echo "ibase=16; scale=18;" %|bc`
