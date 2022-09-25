@@ -843,278 +843,34 @@ def api_BlackJackSTAND():
 		return bad_request_error
 
 
-#xmr_get_block_count
-@app.route('/v1/xmr_get_block_count', methods = ['POST'])
-def api_xmr_get_block_count():
-
-	response = subprocess.check_output(['/services/scripts/xmr_get_block_count.sh'], shell=False)
-
-	try:
-		return response
-	except:
-		return bad_request_error
-
-
-#xmr_get_block_header_by_hash
-@app.route('/v1/xmr_get_block_header_by_hash', methods = ['POST'])
-def api_xmr_get_block_header_by_hash():
-
-	payload = request.json
-	payload_count = len(payload)
-
-	if len(payload) == 1:
-		print (payload)
-	else:
-		payload_error = jsonify({
-		'code': 1025,
-		'error': 'Received parameters count '+str(payload_count)+' do not match expected 1'
-		})
-		return payload_error
-
-	hash = payload[0]
-
-	response = subprocess.check_output(['/services/scripts/xmr_get_block_header_by_hash.sh', hash], shell=False)
-
-	try:
-		return response
-	except:
-		return bad_request_error
-
-
-#xmr_get_block_header_by_height
-@app.route('/v1/xmr_get_block_header_by_height', methods = ['POST'])
-def api_xmr_get_block_header_by_height():
-
-	payload = request.json
-	payload_count = len(payload)
-
-	if len(payload) == 1:
-		print (payload)
-	else:
-		payload_error = jsonify({
-		'code': 1025,
-		'error': 'Received parameters count '+str(payload_count)+' do not match expected 1'
-		})
-		return payload_error
-
-	block = payload[0]
-
-	response = subprocess.check_output(['/services/scripts/xmr_get_block_header_by_height.sh', block], shell=False)
-
-	try:
-		return response
-	except:
-		return bad_request_error
-
-
-#xmr_get_block_headers_range
-@app.route('/v1/xmr_get_block_headers_range', methods = ['POST'])
-def api_xmr_get_block_headers_range():
-
-	payload = request.json
-	payload_count = len(payload)
-
-	if len(payload) == 2:
-		print (payload)
-	else:
-		payload_error = jsonify({
-		'code': 1025,
-		'error': 'Received parameters count '+str(payload_count)+' do not match expected 2'
-		})
-		return payload_error
-
-	start_block = payload[0]
-	end_block = payload[1]	
-
-	response = subprocess.check_output(['/services/scripts/xmr_get_block_headers_range.sh', start_block, end_block], shell=False)
-
-	try:
-		return response
-	except:
-		return bad_request_error
-
-
-#xmr_get_fee_estimate
-@app.route('/v1/xmr_get_fee_estimate', methods = ['POST'])
-def api_xmr_get_fee_estimate():
-
-	response = subprocess.check_output(['/services/scripts/xmr_get_fee_estimate.sh'], shell=False)
-
-	try:
-		return response
-	except:
-		return bad_request_error
-
-
-#xmr_get_last_block_header
-@app.route('/v1/xmr_get_last_block_header', methods = ['POST'])
-def api_xmr_get_last_block_header():
-
-	response = subprocess.check_output(['/services/scripts/xmr_get_last_block_header.sh'], shell=False)
-
-	try:
-		return response
-	except:
-		return bad_request_error
-
-
-#xmr_hard_fork_info
-@app.route('/v1/xmr_hard_fork_info', methods = ['POST'])
-def api_xmr_hard_fork_info():
-
-	response = subprocess.check_output(['/services/scripts/xmr_hard_fork_info.sh'], shell=False)
-
-	try:
-		return response
-	except:
-		return bad_request_error
-
-
-#xmr_on_get_block_hash
-@app.route('/v1/xmr_on_get_block_hash', methods = ['POST'])
-def api_xmr_on_get_block_hash():
-
-	payload = request.json
-	payload_count = len(payload)
-
-	if len(payload) == 1:
-		print (payload)
-	else:
-		payload_error = jsonify({
-		'code': 1025,
-		'error': 'Received parameters count '+str(payload_count)+' do not match expected 1'
-		})
-		return payload_error
-
-	block = payload[0]
-
-	response = subprocess.check_output(['/services/scripts/xmr_on_get_block_hash.sh', block], shell=False)
-
-	try:
-		return response
-	except:
-		return bad_request_error
-
-
-#xmr_get_block
-@app.route('/v1/xmr_get_block', methods = ['POST'])
-def api_xmr_get_block():
-
-	payload = request.json
-	payload_count = len(payload)
-
-	if len(payload) == 1:
-		print (payload)
-	else:
-		payload_error = jsonify({
-		'code': 1025,
-		'error': 'Received parameters count '+str(payload_count)+' do not match expected 1'
-		})
-		return payload_error
-
-	block = payload[0]
-
-	response = subprocess.check_output(['/services/scripts/xmr_get_block.sh', block], shell=False)
-
-	try:
-		return response
-	except:
-		return bad_request_error
-
-
-#xmr_get_version
-@app.route('/v1/xmr_get_version', methods = ['POST'])
-def api_xmr_get_version():
-
-	response = subprocess.check_output(['/services/scripts/xmr_get_version.sh'], shell=False)
-
-	try:
-		return response
-	except:
-		return bad_request_error
-
-
-#xmr_get_transaction_pool
-@app.route('/v1/xmr_get_transaction_pool', methods = ['POST'])
-def api_xmr_get_transaction_pool():
-
-	response = subprocess.check_output(['/services/scripts/xmr_get_transaction_pool.sh'], shell=False)
-
-	try:
-		return response
-	except:
-		return bad_request_error
-
-
-#xmr_get_transaction_pool_stats
-@app.route('/v1/xmr_get_transaction_pool_stats', methods = ['POST'])
-def api_xmr_get_transaction_pool_stats():
-
-	response = subprocess.check_output(['/services/scripts/xmr_get_transaction_pool_stats.sh'], shell=False)
-
-	try:
-		return response
-	except:
-		return bad_request_error
-
-
-#xmr_send_raw_transaction
-@app.route('/v1/xmr_send_raw_transaction', methods = ['POST'])
-def api_xmr_send_raw_transaction():
-
-	payload = request.json
-	payload_count = len(payload)
-
-	if len(payload) == 1:
-		print (payload)
-	else:
-		payload_error = jsonify({
-		'code': 1025,
-		'error': 'Received parameters count '+str(payload_count)+' do not match expected 1'
-		})
-		return payload_error
-
-	tx_as_hex = payload[0]
-
-	response = subprocess.check_output(['/services/scripts/xmr_send_raw_transaction.sh', tx_as_hex], shell=False)
-
-	try:
-		return response
-	except:
-		return bad_request_error
-
-
-#xmr_get_transactions
-@app.route('/v1/xmr_get_transactions', methods = ['POST'])
-def api_xmr_get_transactions():
-
-	payload = request.json
-	payload_count = len(payload)
-
-	if len(payload) == 1:
-		print (payload)
-	else:
-		payload_error = jsonify({
-		'code': 1025,
-		'error': 'Received parameters count '+str(payload_count)+' do not match expected 1'
-		})
-		return payload_error
-
-	tx_hashes = payload[0]
-
-	response = subprocess.check_output(['/services/scripts/xmr_get_transactions.sh', tx_hashes], shell=False)
-
-	try:
-		return response
-	except:
-		return bad_request_error
-
-
 @app.route('/graph/indexer/<indexer_id>', methods = ['POST', 'GET'])
 @cache.cached(timeout=60)
 def api_graph_rewards(indexer_id):
 
 		data = subprocess.check_output(['/services/scripts/graph_rewards.sh', indexer_id], shell=False)
+
+		response = Response(response=data,
+						status=200,
+						mimetype="application/json")
+
+		if response == "":
+			error = jsonify({
+			'code': 1004,
+			'error': 'Indexer-ID does not exist'
+			})
+			return error
+
+		try:
+			return response
+		except:
+			return bad_request_error
+
+
+@app.route('/graph/testnet/indexer/<indexer_id>', methods = ['POST', 'GET'])
+@cache.cached(timeout=60)
+def api_graph_testnet_rewards(indexer_id):
+
+		data = subprocess.check_output(['/services/scripts/graph_rewards_testnet.sh', indexer_id], shell=False)
 
 		response = Response(response=data,
 						status=200,
@@ -1156,10 +912,55 @@ def api_graph_indexers():
 			return bad_request_error
 
 
+@app.route('/graph/testnet/indexers/', methods = ['POST', 'GET'])
+@cache.cached(timeout=86400)
+def api_graph_testnet_indexers():
+
+		data = subprocess.check_output(['/services/scripts/graph_indexers_testnet.sh'], shell=False)
+
+		response = Response(response=data,
+						status=200,
+						mimetype="application/json")
+
+		if response == "":
+			error = jsonify({
+			'code': 1004,
+			'error': 'Indexers does not exist'
+			})
+			return error
+
+		try:
+			return response
+		except:
+			return bad_request_error
+
+
 @app.route('/graph/network/', methods = ['POST', 'GET'])
 def api_graph_network():
 
 		data = subprocess.check_output(['/services/scripts/graph_network.sh'], shell=False)
+
+		response = Response(response=data,
+						status=200,
+						mimetype="application/json")
+
+		if response == "":
+			error = jsonify({
+			'code': 1004,
+			'error': 'Does not exist'
+			})
+			return error
+
+		try:
+			return response
+		except:
+			return bad_request_error
+
+
+@app.route('/graph/testnet/network/', methods = ['POST', 'GET'])
+def api_graph_testnet_network():
+
+		data = subprocess.check_output(['/services/scripts/graph_network_testnet.sh'], shell=False)
 
 		response = Response(response=data,
 						status=200,
@@ -1247,6 +1048,29 @@ def api_graph_allocations_info(indexer_id):
 			return bad_request_error
 
 
+@app.route('/graph/testnet/allocations/info/<indexer_id>', methods = ['POST', 'GET'])
+@cache.cached(timeout=60)
+def api_graph_testnet_allocations_info(indexer_id):
+
+		data = subprocess.check_output(['/services/scripts/graph_allocations_with_id_testnet.sh', indexer_id], shell=False)
+
+		response = Response(response=data,
+						status=200,
+						mimetype="application/json")
+
+		if response == "":
+			error = jsonify({
+			'code': 1004,
+			'error': 'Indexer-ID does not exist'
+			})
+			return error
+
+		try:
+			return response
+		except:
+			return bad_request_error
+
+
 @app.route('/graph/IPFS/<subgraph_id>', methods = ['POST', 'GET'])
 @cache.cached(timeout=86400)
 def api_graph_ipfs(subgraph_id):
@@ -1294,7 +1118,7 @@ def api_graph_subgraphs():
 
 
 @app.route('/graph/indexers/kpi/', methods = ['POST', 'GET'])
-@cache.cached(timeout=3600)
+@cache.cached(timeout=60)
 def api_graph_indexer_kpi():
 
 		data = subprocess.check_output(['/services/scripts/graph_kpi.sh'], shell=False)
@@ -1382,6 +1206,180 @@ def api_graph_network_stake():
 			return response
 		except:
 			return bad_request_error
+
+
+@app.route('/graph/testnet/network/stake/', methods = ['POST', 'GET'])
+def api_graph_testnet_network_stake():
+
+		data = subprocess.check_output(['/services/scripts/graph_network_stake_testnet.sh'], shell=False)
+
+		response = Response(response=data,
+						status=200,
+						mimetype="application/json")
+
+		if response == "":
+			error = jsonify({
+			'code': 1004,
+			'error': 'Does not exist'
+			})
+			return error
+
+		try:
+			return response
+		except:
+			return bad_request_error
+
+
+@app.route('/ethereum/gas/', methods = ['POST', 'GET'])
+@cache.cached(timeout=30)
+def api_ethereum_gas():
+
+		url = 'https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=xxx'
+
+		response = requests.get(url)
+
+		try:
+			return response.json()
+		except:
+			return bad_request_error
+
+
+@app.route('/evmos/account/transactions/<address>/page=<page>', methods = ['POST', 'GET'])
+@cache.cached(timeout=900)
+def api_evmos_account_transactions(address, page):
+
+                data = subprocess.check_output(['/services/scripts/evmos_transactions.sh', address, page], shell=False)
+
+                response = Response(response=data,
+                                                status=200,
+                                                mimetype="application/json")
+
+                if response == "":
+                        error = jsonify({
+                        'code': 1004,
+                        'error': 'Address does not exist'
+                        })
+                        return error
+
+                try:
+                        return response
+                except:
+                        return bad_request_error
+
+
+@app.route('/evmos/apr/', methods = ['POST', 'GET'])
+@cache.cached(timeout=30)
+def api_evmos_apr():
+
+                data = subprocess.check_output(['/services/scripts/evmos_apr.sh'], shell=False)
+
+                response = Response(response=data,
+                                                status=200,
+                                                mimetype="application/json")
+
+                if response == "":
+                        error = jsonify({
+                        'code': 1004,
+                        'error': 'Does not exist'
+                        })
+                        return error
+
+                try:
+                        return response
+                except:
+                        return bad_request_error
+
+
+@app.route('/graph/failedSubgraph/<subgraph>/<block>/<indexer>', methods = ['POST', 'GET'])
+@cache.cached(timeout=60)
+def api_graph_failedSubgraph(subgraph, block, indexer):
+
+                data = subprocess.check_output(['/services/scripts/graph_failed_subgraph.sh', subgraph, block, indexer], shell=False)
+
+                response = Response(response=data,
+                                                status=200,
+                                                mimetype="application/json")
+
+                if response == "":
+                        error = jsonify({
+                        'code': 1004,
+                        'error': 'Bad data'
+                        })
+                        return error
+
+                try:
+                        return response
+                except:
+                        return bad_request_error
+
+
+@app.route('/evmos/account/evm/transactions/<address>', methods = ['POST', 'GET'])
+@cache.cached(timeout=60)
+def api_evmos_account_evm_transactions(address):
+
+                data = subprocess.check_output(['/services/scripts/evmos_evm_transactions.sh', address], shell=False)
+
+                response = Response(response=data,
+                                                status=200,
+                                                mimetype="application/json")
+
+                if response == "":
+                        error = jsonify({
+                        'code': 1004,
+                        'error': 'Address does not exist'
+                        })
+                        return error
+
+                try:
+                        return response
+                except:
+                        return bad_request_error
+
+
+@app.route('/evmos/account/evm/tokentransfers/<address>', methods = ['POST', 'GET'])
+@cache.cached(timeout=60)
+def api_evmos_account_evm_tokentransfers(address):
+
+                data = subprocess.check_output(['/services/scripts/evmos_evm_token_transfers.sh', address], shell=False)
+
+                response = Response(response=data,
+                                                status=200,
+                                                mimetype="application/json")
+
+                if response == "":
+                        error = jsonify({
+                        'code': 1004,
+                        'error': 'Address does not exist'
+                        })
+                        return error
+
+                try:
+                        return response
+                except:
+                        return bad_request_error
+
+
+@app.route('/graph/testnet/subgraphs/active/', methods = ['POST', 'GET'])
+@cache.cached(timeout=30)
+def api_graph_testnet_subgraphs_active():
+
+                data = subprocess.check_output(['/services/scripts/graph_subgraphs_active_testnet.sh'], shell=False)
+
+                response = Response(response=data,
+                                                status=200,
+                                                mimetype="application/json")
+
+                if response == "":
+                        error = jsonify({
+                        'code': 1004,
+                        'error': 'Subgraphs do not exist'
+                        })
+                        return error
+
+                try:
+                        return response
+                except:
+                        return bad_request_error
 
 # Web Server is listening on 0.0.0.0:8192
 if __name__ == '__main__':
