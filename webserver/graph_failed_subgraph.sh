@@ -7,7 +7,7 @@ indexer=$3
 re='^[0-9]+$'
 
 if ! [[ $failed_block =~ $re ]];then
-failed_block_hex=`curl -s https://mainnet.infura.io/v3/e007163a5d954034aa31f14fa6f59b4e     -X POST     -H "Content-Type: application/json"     -d '{"jsonrpc":"2.0","method":"eth_getBlockByHash","params": ["'$failed_block'",false],"id":1}' | jq -r .result.number`
+failed_block_hex=`curl -s https://mainnet.infura.io/v3/xxx     -X POST     -H "Content-Type: application/json"     -d '{"jsonrpc":"2.0","method":"eth_getBlockByHash","params": ["'$failed_block'",false],"id":1}' | jq -r .result.number`
 failed_block=$(printf '%d' $failed_block_hex)
 else
 failed_block=$failed_block
@@ -36,7 +36,7 @@ failed_epoch=$(echo $epoch | jq -r .id)
 failed_start_block_hex=$(printf '%x' $failed_start_block)
 failed_start_block_hex1=$(echo 0x$failed_start_block_hex)
 
-failed_start_block_hash=`curl -s https://mainnet.infura.io/v3/e007163a5d954034aa31f14fa6f59b4e     -X POST     -H "Content-Type: application/json"     -d '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params": ["'$failed_start_block_hex1'",false],"id":1}' | jq -r .result.hash`
+failed_start_block_hash=`curl -s https://mainnet.infura.io/v3/xxx     -X POST     -H "Content-Type: application/json"     -d '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params": ["'$failed_start_block_hex1'",false],"id":1}' | jq -r .result.hash`
 
 result=$(
 echo '{'
