@@ -1,6 +1,6 @@
 #! /bin/bash
 
-data=`curl -s "https://rpc-1.evmos.nodes.guru/tx_search?query=\"message.sender='$1'\"&prove=true&per_page=100&page=$2"`
+data=`curl -s "https://rpc-1.evmos.nodes.guru/tx_search?query=\"message.sender='$1'\"&per_page=100&page=$2"`
 
 hash_list=$(echo $data | jq -r .result.txs[].hash)
 
